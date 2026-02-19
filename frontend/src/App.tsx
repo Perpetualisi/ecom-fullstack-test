@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { ShoppingBag, Star, PackageSearch, Trash2, Filter } from 'lucide-react'
+// Removed unused 'Star' and 'PackageSearch' to pass Vercel build
+import { ShoppingBag, Trash2, Filter } from 'lucide-react'
 
 interface Product {
   id: number;
@@ -9,7 +10,7 @@ interface Product {
   price: number;
   image: string;
   category: string;
-  stock: number; // This matches your new database column!
+  stock: number; 
 }
 
 function App() {
@@ -17,9 +18,9 @@ function App() {
   const [cartCount, setCartCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // This function fetches products, with an optional category filter
   const fetchProducts = (category?: string) => {
     setLoading(true);
+    // Note: When you get your Render URL, replace 'http://localhost:5000' with it
     const url = category 
       ? `http://localhost:5000/products?category=${category}` 
       : 'http://localhost:5000/products';
@@ -64,7 +65,6 @@ function App() {
         </div>
       </header>
 
-      {/* CATEGORY FILTER SECTION */}
       <div style={{ maxWidth: '1200px', margin: '0 auto 2rem', display: 'flex', gap: '10px', alignItems: 'center' }}>
         <Filter size={20} />
         <button onClick={() => fetchProducts()} style={btnStyle}>All</button>
@@ -92,7 +92,6 @@ function App() {
                       <Trash2 size={20} />
                     </button>
 
-                    {/* DYNAMIC BUTTON LOGIC */}
                     <button 
                       disabled={product.stock === 0}
                       onClick={() => setCartCount(c => c + 1)}
