@@ -6,8 +6,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   // Use the deployed URL in production, or localhost in development
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
+const API_BASE_URL = 'https://techmarket-api.onrender.com';
   // Function to fetch products (handles filtering too!)
   const fetchProducts = (category = '') => {
     setLoading(true);
